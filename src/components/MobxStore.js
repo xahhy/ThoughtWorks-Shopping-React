@@ -1,11 +1,12 @@
-import {observable, action, computed, autorun} from 'mobx-react';
-import {extendObservable} from 'mobx'
+import {observable, computed, autorun} from 'mobx-react';
+import {extendObservable, action} from 'mobx'
 
 export default class MobxStore {
     constructor() {
         extendObservable(this, {
             itemData: {},
-            cartData: {}
+            cartData: {items:[]},
+
         })
     }
 
@@ -13,6 +14,27 @@ export default class MobxStore {
     replace = (data) => {
         this.itemData = data;
     };
+
+    /**
+     * 如果购物车里已有该物品newItem，则在购物车里再增加newItem.count个。否则向购物车添加该物品newItem
+     * 然后将商品数量置为1
+     * @param newItem
+     */
+    addToCart(newItem){
+        if(newItem.count <= 0)return;
+        let item = this.cartData.items.filter((item, index) => {return item.barcode === newItem.barcode});
+        if(item.length !== 0){
+            item[0].count += newItem.count;
+        }else{
+            this.cartData.items.push({...newItem});
+        }
+        newItem.count = 1;
+    }
+
+    deleteCartItem(delItem){
+        this.cartData.items.remove(delItem)
+    }
+
 
     //按下的反选
     itemPress = () => {

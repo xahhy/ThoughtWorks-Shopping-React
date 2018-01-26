@@ -6,7 +6,7 @@ export default class ShoppingFooter extends React.Component {
         return (
             <div className="card">
                 <div className="card-body">
-                    <a href="#" className="btn btn-primary" onClick={this.props.clickBuyButton}>结算</a>
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">结算</button>
                 </div>
             </div>
         )

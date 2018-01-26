@@ -28,7 +28,31 @@ const ITEMS = [
         name: '电池',
         unit: '个',
         price: 2.00,
-    }
+    },
+    {
+        barcode: 'ITEM000005',
+        name: '电池',
+        unit: '个',
+        price: 2.00,
+    },
+    {
+        barcode: 'ITEM000006',
+        name: '电池',
+        unit: '个',
+        price: 2.00,
+    },
+    {
+        barcode: 'ITEM000007',
+        name: '电池',
+        unit: '个',
+        price: 2.00,
+    },
+    {
+        barcode: 'ITEM000008',
+        name: '电池',
+        unit: '个',
+        price: 2.00,
+    },
 ];
 
 export {ITEMS};

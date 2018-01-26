@@ -1,6 +1,7 @@
 import React from 'react';
 import {observer} from 'mobx-react';
 import {ITEMS} from './Items'
+import {action} from "mobx/lib/mobx";
 
 const ShoppingList = observer(class ShoppingList extends React.Component {
     constructor(props) {
@@ -16,8 +17,8 @@ const ShoppingList = observer(class ShoppingList extends React.Component {
                     (item, index) => <ShoppingItem
                         key={item.barcode}
                         item={item}
+                        data={this.props.data}
                         ref={(item) => this.items[index] = item}
-                        handleAddToCart={this.handleAddToCart}
                     />)}
             </div>
         )
@@ -27,9 +28,13 @@ const ShoppingList = observer(class ShoppingList extends React.Component {
 const ShoppingItem = observer(class ShoppingItem extends React.Component {
     constructor(props) {
         super(props);
+        this.handleAddToCart = this.handleAddToCart.bind(this);
+        this.getCartNumber = this.getCartNumber.bind(this);
+        this.renderCartNumber = this.renderCartNumber.bind(this);
     }
 
     render() {
+        let cartNumber = this.getCartNumber(this.props.item);
         return (
             <div className="card shopping-item">
                 <div className="card-header">{this.props.item.name}</div>
@@ -46,11 +51,36 @@ const ShoppingItem = observer(class ShoppingItem extends React.Component {
                         <div className="col-12 col-sm">{this.props.item.unit}</div>
                     </div>
                     <div className="col">
-                        <button className="btn btn-warning" onClick={this.handleAddToCart}>加入购物车</button>
+                        <button className="btn btn-warning" onClick={this.handleAddToCart}>
+                            加入购物车
+                            {this.renderCartNumber(this.props.item)}
+                        </button>
                     </div>
                 </div>
             </div>
         )
+    }
+
+    handleAddToCart() {
+        this.props.data.addToCart(this.props.item);
+    }
+
+    getCartNumber(item) {
+        let _item = this.props.data.cartData.items.filter((cartItem, index) => {
+            return cartItem.barcode === item.barcode
+        });
+        if (_item.length === 0) {
+            return 0;
+        } else {
+            return _item[0].count;
+        }
+    }
+
+    renderCartNumber(item){
+        let cartNumber = this.getCartNumber(item);
+        if(cartNumber !== 0){
+            return <span className="badge badge-success">{cartNumber}</span>
+        }
     }
 });
 
