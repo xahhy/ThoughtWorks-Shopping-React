@@ -10,6 +10,7 @@ cache:
   - node_modules
 script:
 - npm install
+- unset CI
 - npm run build
 after_success:
   - touch ./build/Staticfile
