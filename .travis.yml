@@ -15,6 +15,7 @@ script:
 after_success:
   - touch ./build/Staticfile
 before_deploy:
+  - cp manifest.yml build/
   - cd build
 deploy:
   provider: cloudfoundry

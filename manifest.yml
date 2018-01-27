@@ -1,0 +1,5 @@
+---
+applications:
+  - name: shopping-react
+    memory: 128M
+    instances: 1
