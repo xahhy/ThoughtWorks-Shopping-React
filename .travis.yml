@@ -1,0 +1,25 @@
+sudo: true
+language: node_js
+branches:
+  only:
+  - master
+cache:
+  directories:
+  - node_modules
+script:
+- npm install
+- npm run build
+after_success:
+  - touch ./build/Staticfile
+before_deploy:
+  - cd build
+deploy:
+  provider: cloudfoundry
+  api: https://api.run.pivotal.io
+  username: 1014596312@qq.com
+  password:
+    secure: aVxHWx4o6O6FK5zc1VN7hS58vydGowKG7xWankU4lmw8rXC9Pkaxau6tURYCzGgani+E4tgHtVHK9cV1/2h+TPp23vprQfCT6V59uKly1owHI46WUUskqyBUAZk+B1ax1YyvMpSjZaZQxgD++9oWgzbq8rtAYJSF5lQHjp2eJuv0JEqrJTXW59wtJUUHseljhdqlOgQQt+dg9Ji8FgFcIywcqt7DvLRRn5hBL/LvUkCvl3gM3HKmnwsnwrhfS98AJaRYEY3k53TLMD6QYffZYimiVnfytkBmIdDQqEwiK1jByinOJ5+BrA31pwzEI+klzCqvSg8E3s72KPIA6UACGdoy7b8H7yiwDT4ae7n8I39nUwJkAFNNqSmpPjOV0qSqG2Vn11PpjlDbUY66mAedp8isTt57p/Dy24mCm1kiBz1HDJasnt2f4DKfEUsos27bRnotZtAsyXBcImanv+mLuthdlf1/D2yN45L3cHypitApBOOAJFIjAtsp4jvGkUdevmUyonO9rnpH4NZDh8Eb8jZS50WQoP9ItteiRpxb8U5fx2nSXVPELNOLZITj5mc1dMXcykQQNov6CMJ3FBAxiC7TGasTcbKT28N1ICzwruSbNaTsIGYn/fSlrZQ1RqN0Ag2QYsggsu9TfEbcic+OHbk885+JDisuCSM0c0TEQHs=
+  organization: xahhy
+  space: develop
+  on:
+    repo: xahhy/ThoughtWorks-Shopping-React
