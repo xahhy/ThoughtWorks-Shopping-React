@@ -13,7 +13,7 @@ const ShoppingList = observer(class ShoppingList extends React.Component {
         console.log(this.props.items);
         return (
             <div>
-                {this.props.items.map(
+                {this.props.items && this.props.items.map(
                     (item, index) => <ShoppingItem
                         key={item.barcode}
                         item={item}

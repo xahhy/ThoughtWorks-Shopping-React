@@ -6,7 +6,6 @@ export default class MobxStore {
         extendObservable(this, {
             itemData: {},
             cartData: {items:[]},
-
         })
     }
 
